@@ -1,0 +1,12 @@
+{
+  "name": "practice-nvm-init",
+  "version": "1.0.0",
+  "description": "Demo project for practising \"nvm install\" command",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "robb",
+  "license": "ISC",
+  "dependencies": {}
+}
