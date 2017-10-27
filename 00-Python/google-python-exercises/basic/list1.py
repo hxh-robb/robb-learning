@@ -22,7 +22,11 @@
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
   # +++your code here+++
-  return
+  count = 0
+  for word in words:
+    if len(word) >= 2 and word[0] == word[-1]:
+      count += 1
+  return count
 
 
 # B. front_x
@@ -34,9 +38,54 @@ def match_ends(words):
 # before combining them.
 def front_x(words):
   # +++your code here+++
-  return
+  # return front_x_solution_1(words)
+  # return front_x_solution_2(words)
+  # return front_x_solution_3(words)
+  return front_x_solution_4(words)
 
+def front_x_solution_1(words):
+  ''' avoid pylint warning '''
+  i = 0
+  while i < len(words) - 1:
+    j = i + 1
+    while j < len(words):
+      ch_x = words[i][0]
+      ch_y = words[j][0]
+      if (ch_x != 'x' and ch_y == 'x') or \
+      (((ch_x == 'x' and ch_y == 'x') or (ch_x != 'x' and ch_y != 'x')) and words[i] > words[j]):
+        tmp = words[i]
+        words[i] = words[j]
+        words[j] = tmp
+      j += 1
+    i += 1
+  return words
 
+def front_x_solution_2(words):
+  ''' avoid pylint warning '''
+  my_cmp = lambda x, y: (
+      0 if x == y else
+      1 if (x[0] != 'x' and y[0] == 'x') or \
+        (((x[0] == 'x' and y[0] == 'x') or (x[0] != 'x' and y[0] != 'x')) and x > y) else -1
+      )
+  words.sort(cmp=my_cmp)
+  return words
+
+def front_x_solution_3(words):
+  ''' avoid pylint warning '''
+  part_1 = []
+  part_2 = []
+  for word in words:
+    if word[0] == 'x':
+      part_1.append(word)
+    else:
+      part_2.append(word)
+  return sorted(part_1) + sorted(part_2)
+
+def front_x_solution_4(words):
+  ''' avoid pylint warning '''
+  # words.sort(key=lambda x: x if len(x) > 0 and x[0] == 'x' else 'y' + x)
+  # return words
+  return sorted(words, key=lambda x: x if x and x[0] == 'x' else 'y' + x)
 
 # C. sort_last
 # Given a list of non-empty tuples, return a list sorted in increasing
@@ -46,7 +95,7 @@ def front_x(words):
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
   # +++your code here+++
-  return
+  return sorted(tuples, key=lambda x: x[-1])
 
 
 # Simple provided test() function used in main() to print

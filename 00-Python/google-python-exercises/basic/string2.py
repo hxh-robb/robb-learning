@@ -1,4 +1,4 @@
-#!/usr/bin/python2.4 -tt
+#!/usr/bin/python -tt
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -17,7 +17,7 @@
 # Return the resulting string.
 def verbing(s):
   # +++your code here+++
-  return
+  return s if len(s) < 3 else ( s + 'ly' if s.endswith('ing') else s + 'ing' )
 
 
 # E. not_bad
@@ -30,7 +30,13 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
   # +++your code here+++
-  return
+  idx_not = s.find('not')
+  idx_bad = s.find('bad')
+  if idx_not == -1 or idx_bad == -1 or idx_not > idx_bad:
+    return s
+  else:
+    s = s.replace(s[idx_not:idx_bad+3], 'good')
+    return not_bad(s)
 
 
 # F. front_back
@@ -42,8 +48,18 @@ def not_bad(s):
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
   # +++your code here+++
-  return
+  a_fb = dividing(a)
+  b_fb = dividing(b)
+  return a_fb[0] + b_fb[0] + a_fb[1] + b_fb[1]
 
+# a helper function for front_back
+def dividing(text):
+  ''' avoid pylint C0111 '''
+  len_s = len(text)
+  idx = len_s / 2
+  if not len_s % 2 == 0:
+    idx += 1
+  return [text[0:idx], text[idx:]]
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
@@ -67,6 +83,7 @@ def main():
   print 'not_bad'
   test(not_bad('This movie is not so bad'), 'This movie is good')
   test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
+  test(not_bad('This dinner is not that bad, really not bad!'), 'This dinner is good, really good!')
   test(not_bad('This tea is not hot'), 'This tea is not hot')
   test(not_bad("It's bad yet not"), "It's bad yet not")
 
