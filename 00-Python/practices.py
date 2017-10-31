@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """ MAMAMAMAM """
 
-# import sys
+import sys
 import time
 
 def main():
@@ -54,5 +54,25 @@ def test_performance():
       same
   )
 
+def test_cli_args(argv):
+  ''' avoid pylint '''
+  print '--option' in argv
+
+def test_with():
+  ''' avoid pylint '''
+  input_file = {}
+  try:
+    with open('/tmp/test_text1', 'rU') as input_file:
+      for line in input_file:
+        print line.replace('\n', '')
+    print input_file
+  except Exception: # pylint: disable=W0703
+    # do nothing
+    pass
+  return
+
 if __name__ == '__main__':
-  test_performance()
+  sys.tracebacklimit = 0
+  # test_performance()
+  # test_cli_args(sys.argv[1:])
+  test_with()

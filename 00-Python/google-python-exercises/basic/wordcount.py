@@ -44,6 +44,51 @@ import sys
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
+def extract_dict(filename):
+  ''' avoid pylint '''
+  text_file = open(filename, 'rU')
+  text_dict = {}
+  for line in text_file:
+    ## use str.partition
+    # while True:
+    #   words = line.partition(' ')
+    #   word = words[0][:-1] if words[0][-1:] == '\n' else words[0]
+    #   line = words[2]
+    #   if word:
+    #     if not word.lower() in text_dict:
+    #       text_dict[word.lower()] = 1
+    #     else:
+    #       text_dict[word.lower()] += 1
+    #   if not line:
+    #     break
+    ## use str.split and replace
+    # words = line.split(' ')
+    words = line.split()
+    for word in words:
+      # word = word.replace('\n','')
+      # word = word[:-1] if word[-1:] == '\n' else word
+      # if not word:
+      #   continue
+      if not word.lower() in text_dict:
+        text_dict[word.lower()] = 1
+      else:
+        text_dict[word.lower()] += 1
+  text_file.close()
+  return text_dict
+
+def print_words(filename):
+  ''' avoid pylint '''
+  my_dict = extract_dict(filename)
+  for item in sorted(my_dict.items()):
+    print '%s %d' % item
+  return
+
+def print_top(filename):
+  ''' avoid pylint '''
+  my_dict = extract_dict(filename)
+  for item in sorted(my_dict.items(),key=lambda x:x[1],reverse=True)[:20]:
+    print '%s %d' % item
+  return
 
 ###
 
@@ -66,3 +111,4 @@ def main():
 
 if __name__ == '__main__':
   main()
+  # print extract_dict('/tmp/test_text')

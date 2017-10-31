@@ -30,7 +30,7 @@ def linear_merge(list1, list2):
   # +++your code here+++
   # return sorted(list1+list2)
   result = []
-  while len(list1) and len(list2):
+  while list1 and list2:
     if list1[-1] > list2[-1]:
       result.append(list1.pop(-1))
     else:
