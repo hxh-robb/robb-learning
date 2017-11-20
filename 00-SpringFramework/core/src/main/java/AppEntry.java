@@ -1,7 +1,10 @@
 import _java.JdkVersion;
 import spring.core.ConfigLoader;
 
-public class Main {
+/**
+ * Application Entry
+ */
+public class AppEntry {
     public static void main(String[] args) {
         // Display current JDK version
         JdkVersion.output();
