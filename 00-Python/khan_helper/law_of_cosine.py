@@ -2,7 +2,7 @@
 
 import math
 import sys
-import trig
+from trig import d2r,r2d,r
 
 # given side a, side b and the angle between both sides, get the length of side c
 def calc_side(a,b,angle):
