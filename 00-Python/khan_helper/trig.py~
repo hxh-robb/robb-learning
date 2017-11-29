@@ -52,5 +52,4 @@ def atan(ratio):
 
 # positive square root
 def sqrt(value):
-  if value < 0 : return 'todo'
   return math.sqrt(value)
